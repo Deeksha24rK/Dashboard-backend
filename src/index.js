@@ -1,9 +1,18 @@
-import express from "express"
-import cors from "cors"
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import mongoose from 'mongoose';
+
+dotenv.config();
 
 const PORT = process.env.PORT || 3000
 
 const app = express();
+
+// Connect to DataBase
+mongoose.connect(process.env.MONGODB_URL)
+    .then(() => console.log('Connected to the DashboardDB'))
+    .catch(() => console.log("Connection Failed"))
 
 app.use(cors({
     origin: 'http://localhost:5173'
